@@ -5,11 +5,14 @@ using UnityEngine;
 public class OpenDoor : MonoBehaviour
 {
     public GameObject doorTrigger;
+    public GameObject doorHologram;
     public Transform leftDoor;
     public Transform rightDoor;
     public float moveSpeed = 1;
     public float sizeOfDoorInX = 1;
     public float amountOfDoorInWall = 0.9f;
+
+    bool isInRange = false;
 
     private Vector3 leftDoorCloseTarget;
     private Vector3 rightDoorCloseTarget;
@@ -32,14 +35,8 @@ public class OpenDoor : MonoBehaviour
 
         OpenDoors();
         CloseDoors();
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            //ButtonTryToOpenDoors();
-        }
-
-
     }
+
 
     void SetInitialReferences()
     {
@@ -105,6 +102,7 @@ public class OpenDoor : MonoBehaviour
         {
             return;
         }
+
         startTime = Time.time;
         isDoorOpenButtonPressed = true;
     }

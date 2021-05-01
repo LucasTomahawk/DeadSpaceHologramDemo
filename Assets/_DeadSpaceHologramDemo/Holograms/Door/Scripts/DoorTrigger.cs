@@ -5,27 +5,37 @@ using UnityEngine;
 public class DoorTrigger : MonoBehaviour
 {
     public OpenDoor Door;
-    bool isInRange = false;
+    public DoorHologram DoorHologram;
+    public bool isInRange = false;
 
 
-    private void OnTriggerStay(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         isInRange = true;
+        StartCoroutine(DoorHologram.ExpandHolo());
         Debug.Log("In Trigger");
     }
 
-    private void OnTriggerExit(Collider other)
+
+
+    public void OnTriggerExit(Collider other)
     {
         isInRange = false;
-        Debug.Log("NOT in Trigger");
         Door.ButtonTryToCloseDoors(); // Close Door on Trigger Exit
+        StartCoroutine(DoorHologram.CollapseHolo());
+        Debug.Log("NOT in Trigger");
     }
 
     private void Update()
     {
-        if (isInRange = true & Input.GetKeyDown(KeyCode.E)) // Open Door Press
+        if (isInRange == true & Input.GetKeyDown(KeyCode.E)) // Open Door Press
         {
+            if (isInRange == false)
+            {
+                return;
+            }
             Door.ButtonTryToOpenDoors();
+            StartCoroutine(DoorHologram.RemoveHolo());
         }
     }
 }
