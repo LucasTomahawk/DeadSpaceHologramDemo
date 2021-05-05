@@ -5,7 +5,6 @@ using UnityEngine;
 public class DoorHologram : MonoBehaviour
 {
     public GameObject Trigger;
-    public GameObject Door;
     public Transform hologram;
 
     public Vector3 startScale;
@@ -34,12 +33,13 @@ public class DoorHologram : MonoBehaviour
 
     public IEnumerator ExpandHolo()
     {
+        FindObjectOfType<AudioManager>().Play("HoloExpand");
         yield return Lerp(transform.localScale, maxScale, duration);
-        //transform.localScale = Vector3.Lerp(transform.localScale, maxScale, speed);
         Debug.Log("Expand");
     }
     public IEnumerator CollapseHolo()
     {
+        FindObjectOfType<AudioManager>().Play("HoloCollapse");
         yield return Lerp(transform.localScale, startScale, duration);
         Debug.Log("Collapse");
     }

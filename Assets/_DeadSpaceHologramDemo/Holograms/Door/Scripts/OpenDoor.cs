@@ -70,6 +70,7 @@ public class OpenDoor : MonoBehaviour
 
         if (Mathf.Approximately(rightDoor.localPosition.x, rightDoorOpenTarget.x))
         {
+            //FindObjectOfType<AudioManager>().Play("DoorOpen");
             Debug.Log("Doors Opened");
             areDoorsOpen = true;
             isDoorOpenButtonPressed = false;
@@ -103,6 +104,7 @@ public class OpenDoor : MonoBehaviour
             return;
         }
 
+        FindObjectOfType<AudioManager>().Play("DoorOpen");
         startTime = Time.time;
         isDoorOpenButtonPressed = true;
     }
@@ -113,6 +115,7 @@ public class OpenDoor : MonoBehaviour
         {
             return;
         }
+        FindObjectOfType<AudioManager>().Play("DoorClose");
         startTime = Time.time;
         isDoorCloseButtonPressed = true;
     }
